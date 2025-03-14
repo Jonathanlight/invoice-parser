@@ -12,6 +12,9 @@ class CsvFileParser implements FileParserInterface
     {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function parse(string $filePath): void
     {
         $d = array_map(function ($r) {
@@ -22,6 +25,7 @@ class CsvFileParser implements FileParserInterface
             $amount = (float) $record[0];
             $currency = $record[1];
             $name = $record[2];
+            $date = $record[3];
 
             $invoice = $this->invoiceRepository->getInvoiceByName($name);
 
@@ -32,6 +36,7 @@ class CsvFileParser implements FileParserInterface
 
             $invoice->setAmount($amount);
             $invoice->setCurrency($currency);
+            $invoice->setDateEventInvoiced(new \DateTimeImmutable($date));
 
             $this->em->persist($invoice);
             $this->em->flush();

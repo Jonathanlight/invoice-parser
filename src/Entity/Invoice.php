@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: 'App\Repository\InvoiceRepository')]
@@ -22,6 +23,14 @@ class Invoice
 
     #[ORM\Column(type: 'string')]
     public string $currency;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $dateEventInvoiced = null;
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +69,18 @@ class Invoice
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getDateEventInvoiced(): ?\DateTimeImmutable
+    {
+        return $this->dateEventInvoiced;
+    }
+
+    public function setDateEventInvoiced(?\DateTimeImmutable $dateEventInvoiced): self
+    {
+        $this->dateEventInvoiced = $dateEventInvoiced;
 
         return $this;
     }

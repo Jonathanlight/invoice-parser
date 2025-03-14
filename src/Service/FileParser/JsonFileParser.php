@@ -12,6 +12,9 @@ class JsonFileParser implements FileParserInterface
     {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function parse(string $filePath): void
     {
         $datas = $this->parseJsonFile($filePath);
@@ -24,6 +27,7 @@ class JsonFileParser implements FileParserInterface
             $amount = $data['montant'];
             $currency = $data['devise'];
             $name = $data['nom'];
+            $date = $data['date'];
 
             $invoice = $this->invoiceRepository->getInvoiceByName($name);
 
@@ -34,6 +38,7 @@ class JsonFileParser implements FileParserInterface
 
             $invoice->setAmount($amount);
             $invoice->setCurrency($currency);
+            $invoice->setDateEventInvoiced(new \DateTimeImmutable($date));
 
             $this->em->persist($invoice);
             $this->em->flush();

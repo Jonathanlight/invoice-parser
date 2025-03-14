@@ -51,6 +51,9 @@ phpunit-test-parse: ## phpunit
 init: ## Initialize the project
 	$(DOCKER_DEV) exec app composer install
 
+migration: ## execute migrations
+	$(DOCKER_DEV) exec app bin/console make:migration
+
 migrate: ## execute migrations
 	$(DOCKER_DEV) exec app bin/console doctrine:migrations:migrate
 
