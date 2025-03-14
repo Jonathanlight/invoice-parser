@@ -36,16 +36,16 @@ jobs:
             composer-${{ runner.os }}-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-scripts --prefer-dist --working-dir=app/symfony
+        run: composer install --no-progress --no-scripts --prefer-dist
 
       - name: Check installed dependencies
-        run: ls -la app/symfony/vendor/bin/
+        run: ls -la vendor/bin/
 
       - name: Run PHP_CodeSniffer with PHP-CS-Fixer
-        run: php app/symfony/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run
+        run: php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run
 
       - name: Run PHPStan
-        run: php app/symfony/vendor/bin/phpstan analyse --configuration=phpstan.dist.neon
+        run: php vendor/bin/phpstan analyse --configuration=phpstan.dist.neon
 
       - name: Run phpunit
-        run: php app/symfony/vendor/bin/phpunit --configuration=phpunit.xml.dist
+        run: php vendor/bin/phpunit --configuration=phpunit.xml.dist
