@@ -1,0 +1,13 @@
+app:
+    file:
+        types:
+            json: "json"
+            xml: "xml"
+            csv: "csv"
+            xlsx: "xlsx"
+parsing:
+    start: "Starting invoice parsing..."
+    file_not_found: "The file {file} does not exist."
+    processing_file: "Processing file - {file}"
+    file_processed: "File processed - {file}"
+    success: "Parsing successfully completed."

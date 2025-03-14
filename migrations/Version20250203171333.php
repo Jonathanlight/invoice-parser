@@ -14,7 +14,7 @@ final class Version20250203171333 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Created invoice table';
     }
 
     public function up(Schema $schema): void

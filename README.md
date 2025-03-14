@@ -20,7 +20,7 @@ Ce projet est une application Symfony qui permet de parser des fichiers de type 
 2. Construis et lance les containers Docker.
 
    ```bash
-   docker-compose up --build -d 
+   make docker-run
    ```
 
    Cela créera les containers pour l'application Symfony et la base de données PostgreSQL.
@@ -28,13 +28,13 @@ Ce projet est une application Symfony qui permet de parser des fichiers de type 
 3. Installe les dépendances PHP via Composer.
 
    ```bash
-   docker-compose exec app composer install
+   make docker-cpi
    ```
 
 4. Créer la base de données et exécute les migrations.
 
    ```bash
-   docker-compose exec app php bin/console doctrine:migrations:migrate
+   make migrate
    ```
 
 ## Lancer l'application
@@ -44,7 +44,7 @@ Ce projet est une application Symfony qui permet de parser des fichiers de type 
 Pour parser les fichiers de factures (`json` ou `csv`), exécute la commande suivante :
 
    ```bash
-  docker-compose run --rm app php bin/console app:parse
+  make app-parse
    ```
 
 Cette commande va charger et parser les fichiers, puis mettre à jour les enregistrements dans la base de données.
@@ -54,11 +54,11 @@ Cette commande va charger et parser les fichiers, puis mettre à jour les enregi
 Pour vérifier le bon fonctionnement de l'application, tu peux exécuter les tests unitaires via PHPUnit. Pour cela, utilise la commande suivante :
 
    ```bash
-  docker-compose exec app php vendor/bin/phpunit tests/InvoiceParserTest.php
+  make phpunit-test-parse
    ```
 
 Pour exécuter tous les tests dans le projet, tu peux utiliser :
 
    ```bash
-  docker-compose exec app php vendor/bin/phpunit
+  make phpunit
    ```
